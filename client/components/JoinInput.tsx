@@ -1,12 +1,17 @@
 'use client';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from '../app/page.module.css'
 import inputStyle from './JoinInput.module.css'
 
 const JoinInput: React.FC = () => {
   const [id, setId] = useState('');
-  const [name, setName] = useState(localStorage.getItem('name') ?? "");
+  const [name, setName] = useState("");
+
+
+  useEffect(()=>{
+    setName(localStorage.getItem('name') ?? "")
+  }, [])
   const handleChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     if(value.length <= 5) setId(value.toUpperCase());
